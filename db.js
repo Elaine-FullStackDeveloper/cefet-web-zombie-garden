@@ -1,20 +1,12 @@
-import mysql from 'mysql2/promise'
-
-const pool = mysql.createPool({
-  // configuração de acesso
-  host: '127.0.0.1',
+var mysql = require('mysql');
+var connection = mysql.createConnection({
+  host: 'localhost',
   database: 'zombies',
   user: 'root',
   password: '123456',
-  port: 3306,
+  multipleStatements: true
+});
 
-  // configuração das conexões
-  multipleStatements: true,
+connection.connect();
 
-  // configuração da pool
-  waitForConnections: true,
-  connectionLimit: 10,
-  queueLimit: 0
-})
-
-export default pool
+module.exports = connection;
